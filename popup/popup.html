@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Crypto Portfolio Tracker</title>
+  <link rel="stylesheet" href="popup.css">
+</head>
+<body>
+  <div class="container">
+    <header>
+      <h1>💰 Crypto Portfolio</h1>
+      <button id="settingsBtn" class="icon-btn" title="Settings">⚙️</button>
+    </header>
+
+    <!-- Total Value Section -->
+    <div class="total-section">
+      <div class="total-label">Total Portfolio Value</div>
+      <div id="totalValue" class="total-value">$0.00</div>
+      <div id="totalChange" class="total-change">+$0.00 (0%)</div>
+    </div>
+
+    <!-- Add Address Section -->
+    <div class="add-section" id="addSection">
+      <h3>Add Wallet Address</h3>
+      <select id="chainSelect">
+        <option value="ethereum">Ethereum (ETH)</option>
+        <option value="bitcoin">Bitcoin (BTC)</option>
+        <option value="solana">Solana (SOL)</option>
+      </select>
+      <input 
+        type="text" 
+        id="addressInput" 
+        placeholder="Enter public address (0x... or bc1...)"
+      >
+      <input 
+        type="text" 
+        id="labelInput" 
+        placeholder="Label (optional, e.g., 'Main Wallet')"
+      >
+      <div class="button-group">
+        <button id="addAddressBtn" class="btn-primary">Add Address</button>
+        <button id="cancelAddBtn" class="btn-secondary">Cancel</button>
+      </div>
+    </div>
+
+    <!-- Wallets List -->
+    <div class="wallets-section">
+      <div class="section-header">
+        <h3>Your Wallets</h3>
+        <button id="addWalletBtn" class="btn-add">+ Add</button>
+      </div>
+      <div id="walletsList" class="wallets-list">
+        <!-- Wallets will be inserted here -->
+      </div>
+      <div id="emptyState" class="empty-state">
+        <p>📭 No wallets added yet</p>
+        <p class="empty-hint">Click "Add" to track your first wallet</p>
+      </div>
+    </div>
+
+    <!-- Loading Spinner -->
+    <div id="loadingSpinner" class="loading-spinner hidden">
+      <div class="spinner"></div>
+      <p>Loading data...</p>
+    </div>
+
+    <!-- Footer -->
+    <footer>
+      <p class="privacy-note">🔒 Your addresses are stored locally only</p>
+      <p class="update-time">Last updated: <span id="lastUpdate">Never</span></p>
+    </footer>
+  </div>
+
+  <script src="popup-unified.js"></script>
+</body>
+</html>

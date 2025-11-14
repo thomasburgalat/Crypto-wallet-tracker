@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Test Page</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      padding: 20px;
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      color: white;
+    }
+    .test-button {
+      background: white;
+      color: #667eea;
+      border: none;
+      padding: 15px 30px;
+      border-radius: 8px;
+      font-size: 16px;
+      font-weight: bold;
+      cursor: pointer;
+      margin: 10px;
+    }
+    .test-button:hover {
+      transform: scale(1.05);
+    }
+    #output {
+      background: rgba(255,255,255,0.2);
+      padding: 20px;
+      border-radius: 8px;
+      margin-top: 20px;
+      min-height: 100px;
+    }
+  </style>
+</head>
+<body>
+  <h1>🧪 Extension Test Page</h1>
+  <p>Use this page to test if the extension scripts are loading correctly.</p>
+  
+  <button class="test-button" onclick="testStorage()">Test Storage</button>
+  <button class="test-button" onclick="testAPI()">Test API</button>
+  <button class="test-button" onclick="testWalletAdd()">Test Add Wallet</button>
+  
+  <div id="output">
+    <p>Click a button to run tests...</p>
+  </div>
+
+  <script src="popup-unified.js"></script>
+  <script>
+    const output = document.getElementById('output');
+    
+    function log(message) {
+      output.innerHTML += `<p>✅ ${message}</p>`;
+      console.log(message);
+    }
+    
+    function logError(message) {
+      output.innerHTML += `<p>❌ ${message}</p>`;
+      console.error(message);
+    }
+    
+    async function testStorage() {
+      output.innerHTML = '<p><strong>Testing Storage...</strong></p>';
+      try {
+        log('Storage API available: ' + (typeof browserAPI !== 'undefined'));
+        const wallets = await getWallets();
+        log('Wallets loaded: ' + wallets.length);
+        log('Test passed!');
+      } catch (error) {
+        logError('Storage test failed: ' + error.message);
+      }
+    }
+    
+    async function testAPI() {
+      output.innerHTML = '<p><strong>Testing API...</strong></p>';
+      try {
+        log('Fetching Ethereum price...');
+        const price = await fetchCryptoPrice('ethereum');
+        log('ETH Price: $' + price);
+        log('Test passed!');
+      } catch (error) {
+        logError('API test failed: ' + error.message);
+      }
+    }
+    
+    async function testWalletAdd() {
+      output.innerHTML = '<p><strong>Testing Add Wallet...</strong></p>';
+      try {
+        const testWallet = {
+          id: 'test-' + Date.now(),
+          chain: 'ethereum',
+          address: '0x742d35Cc6634C0532925a3b844Bc9e7595f0bEb',
+          label: 'Test Wallet',
+          addedAt: new Date().toISOString()
+        };
+        
+        log('Adding test wallet...');
+        await addWallet(testWallet);
+        log('Wallet added successfully!');
+        
+        const wallets = await getWallets();
+        log('Total wallets: ' + wallets.length);
+        log('Test passed!');
+      } catch (error) {
+        logError('Add wallet test failed: ' + error.message);
+      }
+    }
+    
+    log('Test page loaded successfully!');
+  </script>
+</body>
+</html>
