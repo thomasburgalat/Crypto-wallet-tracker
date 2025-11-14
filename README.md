@@ -227,10 +227,8 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 
 ## 👨‍💻 Author
 
-Created with ❤️ by [Your Name]
+Created with ❤️ by Thomas
 
-- GitHub: [@yourusername](https://github.com/yourusername)
-- Twitter: [@yourtwitter](https://twitter.com/yourtwitter)
 
 ## 🌟 Show Your Support
 
@@ -244,9 +242,7 @@ If you find this extension useful, please:
 
 Need help? Have questions?
 
-- Open an issue on GitHub
-- Email: your.email@example.com
-- Twitter: [@yourtwitter](https://twitter.com/yourtwitter)
+
 
 ---
 
